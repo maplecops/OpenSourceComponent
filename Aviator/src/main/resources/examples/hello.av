@@ -1,0 +1,4 @@
+## examples/hello.av
+
+println("hello, AviatorScript");
+print(now())
