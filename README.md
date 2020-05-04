@@ -24,3 +24,5 @@ Aviator是一款由一位国内大佬编写，所以也有着很方便的中文�
 </dependency>
 ```
 Aviator接入案例地址为`./Aviator`路径下
+
+[快速入门手册](doc/quickstart.md)

@@ -1,0 +1,3 @@
+## examples/staticFunction.av
+
+inner.isTrue(99)

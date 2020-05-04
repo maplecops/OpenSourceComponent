@@ -1,0 +1,6 @@
+## examples/function.av
+fn add(x,y) {
+    return x+ y;
+}
+println(add(1,2));
+println(add("abc", "def"));
