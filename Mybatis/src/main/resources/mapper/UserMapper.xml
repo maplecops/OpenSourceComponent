@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maple.mybatis.mapper.UserMapper">
+
+    <resultMap id="commonMap" type="User">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userInfo" column="user_info"/>
+        <result property="headImg" column="head_img" jdbcType="BLOB"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="insertColumn">
+        user_name,
+        user_password,
+        user_email,
+        user_info,
+        head_img,
+        create_time
+    </sql>
+    <sql id="insertValue">
+        #{userName},
+        #{userPassword},
+        #{userEmail},
+        #{userInfo},
+        #{headImg},
+        now()
+    </sql>
+
+    <select id="selectAll" resultMap="commonMap">
+        select *
+        from user
+    </select>
+
+    <select id="selectUserByUserName" resultMap="commonMap" parameterType="String">
+        select * from user where user_name = #{userName}
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into user
+            (<include refid="insertColumn"></include>)
+        value(<include refid="insertValue"></include>)
+    </insert>
+
+    <delete id="deleteUserById" parameterType="Long">
+        delete from user where id = #{id}
+    </delete>
+</mapper>

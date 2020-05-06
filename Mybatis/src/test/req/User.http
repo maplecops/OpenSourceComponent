@@ -1,0 +1,14 @@
+GET http://localhost/user/all
+###
+
+GET http://localhost/user/chenzhongzhi
+###
+
+POST http://localhost/user
+Content-Type: application/json
+
+{
+"userName":"mapleccops",
+"userPassword":"Password",
+"userEmail":"mapleccops@gmail.com"
+}
