@@ -8,7 +8,7 @@ POST http://localhost/user
 Content-Type: application/json
 
 {
-"userName":"mapleccops",
-"userPassword":"Password",
-"userEmail":"mapleccops@gmail.com"
+"userName":"mapl",
+"userPassword":"Password00001",
+"userEmail":"ops@ops.ops"
 }

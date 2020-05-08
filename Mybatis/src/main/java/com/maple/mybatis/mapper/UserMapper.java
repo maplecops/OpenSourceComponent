@@ -2,6 +2,7 @@ package com.maple.mybatis.mapper;
 
 import com.maple.mybatis.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,8 +20,10 @@ public interface UserMapper {
 
     int insertUser(User user);
 
-    //int updateUserByUserName(User user, String userName);
+    int updateUserByUserName(@Param("user") User user, @Param("userName") String userName);
 
     int deleteUserById(Long id);
+
+    List<String> getEmailByUserNames(List<String> userNameList);
 
 }

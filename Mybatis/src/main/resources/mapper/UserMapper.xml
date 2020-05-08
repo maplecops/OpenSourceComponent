@@ -27,7 +27,9 @@
         #{userEmail},
         #{userInfo},
         #{headImg},
-        now()
+        now
+        (
+        )
     </sql>
 
     <select id="selectAll" resultMap="commonMap">
@@ -36,16 +38,50 @@
     </select>
 
     <select id="selectUserByUserName" resultMap="commonMap" parameterType="String">
-        select * from user where user_name = #{userName}
+        select *
+        from user
+        where user_name = #{userName}
     </select>
 
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into user
-            (<include refid="insertColumn"></include>)
+        (<include refid="insertColumn"></include>)
         value(<include refid="insertValue"></include>)
     </insert>
 
+    <update id="updateUserByUserName">
+        update user
+        set
+        <if test="user.userPassword != null and user.userPassword != ''">
+            user_password = #{user.userPassword},
+        </if>
+        <if test="user.userEmail != null and user.userEmail != ''">
+            user_email = #{user.userEmail},
+        </if>
+        <if test="user.userInfo != null and user.userInfo != ''">
+            user_info = #{user.userInfo},
+        </if>
+        <if test="user.headImg != null and user.headImg != ''">
+            head_img = #{user.headImg},
+        </if>
+        user_name = #{userName}
+        <where>
+            and user_name = #{userName}
+        </where>
+    </update>
+
     <delete id="deleteUserById" parameterType="Long">
-        delete from user where id = #{id}
+        delete
+        from user
+        where id = #{id}
     </delete>
+
+    <select id="getEmailByUserNames" resultType="string">
+        select user_email
+        from user
+        where user_name in
+        <foreach collection="list" open="(" close=")" item="userName" index="i" separator=",">
+            #{userName}
+        </foreach>
+    </select>
 </mapper>

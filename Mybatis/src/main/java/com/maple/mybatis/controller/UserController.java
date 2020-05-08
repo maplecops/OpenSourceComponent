@@ -31,6 +31,11 @@ public class UserController {
         return userMapper.selectUserByUserName(userName);
     }
 
+    @GetMapping("/getEmailByNames")
+    public List<String> getEmailByUserNames(@RequestBody List<String> userNameList) {
+        return userMapper.getEmailByUserNames(userNameList);
+    }
+
     @PostMapping()
     public Long insertUser(@RequestBody User user) {
         log.info("user info is [{}]", user);
@@ -42,5 +47,14 @@ public class UserController {
     @DeleteMapping("/{id}")
     public int deleteUser(@PathVariable("id") Long id) {
         return userMapper.deleteUserById(id);
+    }
+
+    @PatchMapping()
+    public int updateUser(@RequestBody User user){
+        String userName = user.getUserName();
+        if( userName == null || userName.trim().equals("")) {
+            return -1;
+        }
+        return userMapper.updateUserByUserName(user, userName);
     }
 }
